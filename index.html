@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="83dhOLahJP8KMrZJXjbpT6fhOPDUkheojANx8doJ">
+        <title>MARS</title>
+        <!-- Fonts -->
+        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" href="https://www.tovaradar.ru/scss/style.css">
+
+        <link rel="stylesheet" href="https://www.tovaradar.ru/scss/style1.css">
+        <link rel="stylesheet" href="https://www.tovaradar.ru/scss/responsive.css">
+
+        <link rel="stylesheet" href="https://www.tovaradar.ru/scss/owl.carousel.min.css">
+        <link rel="stylesheet" href="https://www.tovaradar.ru/scss/owl.theme.default.min.css">
+        <!-- <script type="module" src="http://127.0.0.1:5173/@vite/client"></script><script type="module" src="http://127.0.0.1:5173/resources/js/app.js"></script> -->
+        <script src="https://www.tovaradar.ru/js/jquery.min.js"></script>
+        <!-- <script src="https://www.tovaradar.ru/js/OwlCarousel/docs/assets/vendors/jquery.min.js"></script> -->
+        <script src="https://www.tovaradar.ru/js/owl.carousel.min.js"></script>
+        <!-- <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" /> -->
+        <!-- <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" /> -->
+        <!-- <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        <script src="https://cdn.tailwindcss.com"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+          integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen">
+            <nav class="py-3">
+    <div class="main max-w-7xl px-12 mx-auto sm:px-12 lg:px-12 md:px-12">
+    	<div class="navigation flex justify-between  items-center">
+				<!-- Website Logo -->
+            <div class="shrink-0 flex items-center flex-col">
+                <a href="https://www.tovaradar.ru">
+                    <a href="/"><img class="logo lg:h-24 h-16 app-logo" src="https://www.tovaradar.ru/img/logo.png" /></a>
+                </a>
+            </div>
+            <div class="lg:block hidden">
+                <div x-cloak class="group inline-block" x-data="{ modelOpen: false }"   @mousedown.outside="hide()">
+    <div @click="modelOpen = false" x-show="modelOpen" class="w-full bg-black opacity-40 absolute left-0  sm:top-56 lg:top-44 z-40 h-screen">
+    </div>
+    <button @click="modelOpen =!modelOpen" onclick="show()" :class="{'late site-color':modelOpen}" class="cat-full hidden sm:flex md:flex lg:flex text-white site-green focus:outline-none  rounded text-md px-2 p-1 text-center  items-center" type="button">
+          <img x-show="!modelOpen" src="https://www.tovaradar.ru/img/catalog.png"  class="object-contain h-5" />
+          <img x-show="modelOpen" src="https://www.tovaradar.ru/img/catalog-close.png"  class="object-contain h-3" />
+          <span  class="px-1">Каталог</span>
+    </button>
+    <button @click="modelOpen =!modelOpen" onclick="show()" :class="{'late site-color':modelOpen}" class="cat-mob hidden  flex text-white site-green focus:outline-none  rounded text-md px-2 p-1 text-center  items-center" type="button">
+          <img x-show="!modelOpen" src="https://www.tovaradar.ru/img/catalog.png"  class="object-contain h-5" />
+          <img x-show="modelOpen" src="https://www.tovaradar.ru/img/catalog-close.png"  class="object-contain h-3" />
+    </button>
+
+
+        <template x-for="data in datas" :key="data.id">
+            <li class="px-3 py-1" >
+                 <button  class="w-full text-left flex items-center " @click=show2(data.id,data.title)>
+                    <div class="w-full">
+                        <a href="/categories" :class="{'site-color' : isSelected === data.id}" class="pr-1 max-w-fit hover-green	text-sm hover:underline  flex-1" x-text="data.title"></a>
+                    </div>
+                    <img :class="`img${data.id}`" class="img" src="https://www.tovaradar.ru/img/arrow-right.png" alt="">
+                </button>
+            </li>
+        </template>
+   </ul>
+  
+  
+</div>
+            </div>
+            <form class="lg:flex items-center w-1/3  hidden">
+                <label   for="simple-search" class="sr-only"></label>
+                <div class="relative w-full">
+                    <input type="text" id="simple-search" class="green-border bg-gray-50 border text-gray-900 text-xs rounded-l-md  block w-full pl-5 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Я ищу...">
+                </div>
+                <button type="submit" class="p-2 text-xs font-medium text-white site-green rounded-r-md border green-border  focus:ring-4 outline-none">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
+            <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+    <div @click="open = ! open">
+        <div class="flex flex-col px-2 pt-3 relative items-center cursor-pointer">
+                       
+                        <img src="https://www.tovaradar.ru/img/User.png"  class="object-contain h-5" />
+                        <span  class="px-2 py-2 text-sm">Войти</span>
+                    </div>
+    </div>
+
+</div>
+            <a href="/orders" class="flex flex-col pt-3 nav-items relative w-1/12 cursor-pointer  items-center">
+                <div x-data="{ show: true }">
+                    <span x-show="show" class="counts absolute site-green top-2 lg:right-6 sm:right-0.5 md:right-5 h-4 w-4 rounded-full flex justify-center items-center items text-2xs text-white"><span>5</span></span>
+                </div>
+                <img src="https://www.tovaradar.ru/img/Vector.png"  class="object-contain h-5" />
+                <span class="px-2 py-2 text-sm">Заказы</span>
+            </a>
+            <a href="/favorites" class="flex flex-col nav-items pt-3 relative w-1/12 cursor-pointer items-center">
+                <div x-data="{ show: true }">
+                    <span x-show="show" class="counts absolute site-green top-2    lg:right-6 md:right-5 sm:right-0.5  h-4 w-4 rounded-full flex justify-center items-center items text-2xs text-white"><span>12</span></span>
+                </div>
+                <img src="https://www.tovaradar.ru/img/heart.png"  class="object-contain h-5" />
+                <span href="" class="px-2 py-2 text-sm">Избранные</span>
+            </a>
+            <a href="/cart" class="flex flex-col nav-items pt-3 relative w-1/12 cursor-pointer items-center">
+                <div x-data="{ show: true }">
+                    <span x-show="show" class="counts absolute site-green top-2  lg:right-6 sm:right-0.5 md:right-5 h-4 w-4 rounded-full flex justify-center items-center items text-2xs text-white"><span>5</span></span>
+                </div>
+                <img src="https://www.tovaradar.ru/img/Basket.png"  class="object-contain h-5 " />
+                <span href="" class="px-2 py-2 text-sm">Корзина</span>
+            </a>
+    	</div>
+        <div class="md:flex lg:flex hidden  items-center" style="margin-top:-20px">
+            <img src="https://www.tovaradar.ru/img/location.png"  class="object-contain h-3 w-2" />
+            <div x-cloak class="group inline-block" x-data="{ modelOpens: false }"  @mousedown.outside="modelOpens = false">
+    
+            </div>
+            <div class="lg:hidden flex justify-between mt-3">
+                <div x-cloak class="group inline-block" x-data="{ modelOpen: false }"   @mousedown.outside="hide()">
+        <div @click="modelOpen = false" x-show="modelOpen" class="w-full bg-black opacity-40 absolute left-0  sm:top-56 lg:top-44 z-40 h-screen">
+        </div>
+        </form>
+    <button @click="modelOpen =!modelOpen" onclick="show()" :class="{'late site-color':modelOpen}" class="cat-full hidden sm:flex md:flex lg:flex text-white site-green focus:outline-none  rounded text-md px-2 p-1 text-center  items-center" type="button">
+          <img x-show="!modelOpen" src="https://www.tovaradar.ru/img/catalog.png"  class="object-contain h-5" />
+          <img x-show="modelOpen" src="https://www.tovaradar.ru/img/catalog-close.png"  class="object-contain h-3" />
+          <span  class="px-1">Каталог</span>
+    </button>
+    <button @click="modelOpen =!modelOpen" onclick="show()" :class="{'late site-color':modelOpen}" class="cat-mob hidden  flex text-white site-green focus:outline-none  rounded text-md px-2 p-1 text-center  items-center" type="button">
+          <img x-show="!modelOpen" src="https://www.tovaradar.ru/img/catalog.png"  class="object-contain h-5" />
+          <img x-show="modelOpen" src="https://www.tovaradar.ru/img/catalog-close.png"  class="object-contain h-3" />
+    </button>
+
+</div>
+            <form class="flex items-center w-2/3 ">
+                <label  x-text="Search" for="simple-search" class="sr-only"></label>
+                <div class="relative w-full">
+                    <input type="text" id="simple-search" class="green-border bg-gray-50 border text-gray-900 text-sm rounded-l-md  block w-full pl-5 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Я ищу...">
+                </div>
+                <button type="submit" class="p-2 text-sm font-medium text-white site-green rounded-r-md border green-border  focus:ring-4 outline-none">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+            <!-- Page Heading -->
+            
+            <!-- Page Content -->
+            <main>
+                <div class="py-12 main max-w-7xl px-12 mx-auto sm:px-12 lg:px-12 md:px-12" x-data="{modelOpen:false,isSelected:''}">
+        <div class="owl-carousel slider1 owl-carousel1 owl-theme">
+    <div class="item" >
+        <img class="lg:w-full w-4/5 m-auto  rounded-2xl  object-cover" src="https://www.tovaradar.ru/img/carousel/8881244790cef758819b4239a0d3ee41.png">
+   </div>
+    <div class="item" >
+        <img class="lg:w-full w-4/5 m-auto  rounded-2xl  object-cover" src="https://www.tovaradar.ru/img/carousel/23d80683a57ced681310a2f52d11a9a9.png">
+    </div>
+    <div class="item" >
+        <img class="lg:w-full w-4/5 m-auto  rounded-2xl  object-cover" src="https://www.tovaradar.ru/img/carousel/8881244790cef758819b4239a0d3ee41.png">
+    </div>
+</div>
+        <div class="flex justify-between items-center flex-wrap flexbox py-5"  x-data="{ categories: [
+                { id: 1, src: '899c77dc389cb4d2220fe31f1ece8826.png', label: 'Электроника' },
+                { id: 2, src: 'a5e051bcc0751ecc75d243af7c217767.png', label: 'Бытовые товары' },
+                { id: 3, src: 'd0f764d858be5fedbd75f5d4affbc60b.png', label: 'Книги, хобби, канцелярия' },
+                { id: 4, src: 'd9237dd104a68d414a388de32569ac86.png', label: 'Продукты питания' }
+            ]}">
+            <template x-for="category in categories" :key="category.id">
+                <div  class="flex flex-col items-center sm:w-20 shadow-item sm:h-20 md:w-36 md:p-2 lg:w-60 h-64 md:h-44  p-5 rounded-lg white-bg justify-center category-items w-290 h-290">
+                      <div class="p-3">
+                          <img class="h-206 w-250" x-bind:src="`https://www.tovaradar.ru/img/categories/${category.src}`" alt="">
+                      </div>
+                      <div class="">
+                          <span x-text="category.label" class="text-md dark-text"></span>
+                      </div>
+                </div>
+           </template>
+        </div>
+        <p class="font-bold	bold-text bold-text pt-10 pb-5">Популярная компьютерная техника</p>
+        <div class="grid grid-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 grid-cols-5 gap-8 flexbox-hit"  x-data="{ hits: [
+                { id: 1, src: '428a66b45480074e9e4499d9b963f368.png', new:false, price: '3000 ₽', title:'Ультрабук Huawei MateBook D 14 NbD-WDI9 Mystic Silver'},
+                { id: 2, src: 'e66a4355c7ed0a8e80528e399e7baf2c.png', new:true, price: '3000 ₽', title:'Ультрабук Huawei MateBook D 14 NbD-WDI9 Mystic Silver (53013ERK)' },
+                { id: 3, src: '924950eafa3c70c235a3117ef2b6b842.png', new:false, price: '3000 ₽', title:'Умная колонка Яндекс Станция Мини' },
+                { id: 4, src: '79390f3c799bd15491211fcb4773b3a1.png', new:false, price: '3000 ₽', title:'Робот-пылесос Xiaomi Mi Robot'},
+                { id: 5, src: 'b4de14290b7b47b0a27e78d203422824.png', new:false, price: '3000 ₽', title:'Зеркальный фотоаппарат Canon EOS 6D Body' },
+                { id: 6, src: '428a66b45480074e9e4499d9b963f368.png', new:false, price: '3000 ₽', title:'Ультрабук Huawei MateBook D 14 NbD-WDI9 Mystic Silver'},
+                { id: 7, src: 'e66a4355c7ed0a8e80528e399e7baf2c.png', new:true, price: '3000 ₽', title:'Ультрабук Huawei MateBook D 14 NbD-WDI9 Mystic Silver (53013ERK)' },
+                { id: 8, src: '924950eafa3c70c235a3117ef2b6b842.png', new:false, price: '3000 ₽', title:'Умная колонка Яндекс Станция Мини' },
+                { id: 9, src: '79390f3c799bd15491211fcb4773b3a1.png', new:false, price: '3000 ₽', title:'Робот-пылесос Xiaomi Mi Robot'},
+                { id: 10, src: 'b4de14290b7b47b0a27e78d203422824.png', new:false, price: '3000 ₽', title:'Зеркальный фотоаппарат Canon EOS 6D Body' },
+            ]}">
+            <template x-for="hit in hits" :key="hit.id">
+                <div class="flex flex-col p-3 lg:p-4 h-96 rounded-lg justify-between  w-225 mb-5">
+                      <div>
+                          <div class="flex flex justify-between ">
+                              <template x-if="hit.new">
+                                <span class="rounded-lg bg-orange-500 px-2 py-1 text-sm text-white">Новинка</span>
+                              </template>
+                              <span class="rounded-lg font-bold new text-white"></span>
+                              <button type="button" name="button"></button>
+                              <div class=""  x-data="{liked:false}">
+                                  <button @click="liked =!liked"  type="button">
+                                        <img x-show="!liked" src="https://www.tovaradar.ru/img/heart.png"  class="object-contain h-5" />
+                                        <img x-show="liked" src="https://www.tovaradar.ru/img/icon like.png"  class="object-contain h-5" />
+                                  </button>
+                              </div>
+                          </div>
+                          <img class="h-40 m-auto" x-bind:src="`https://www.tovaradar.ru/img/categories/${hit.src}`" alt="">
+                          <div class="text-lg font-bold">
+                              <span>от </span><span x-text="hit.price"></span>
+                          </div>
+                          <a href="/product-card" x-text="hit.title"></a>
+                      </div>
+                      <div class="flex flex-col">
+                          <span class="text-md text-gray-400 mb-1">26 предложений</span>
+                          <button @click="modelOpen =true,isSelected = hit" class="site-green w-2/3 text-white py-2 px-4 rounded-10">
+                              Купить
+                          </button>
+                      </div>
+                </div>
+           </template>
+        </div>
+        <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
+        <div x-cloak @click="modelOpen = false" x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0" class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true"
+        ></div>
+
+        <div x-cloak x-show="modelOpen"
+            x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="transition ease-in duration-200 transform"
+            x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            class="inline-block w-full max-w-3xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+            <button @click="modelOpen = false" class="absolute right-5 text-gray-600 focus:outline-none hover:text-gray-700">
+                <img class="w-4 object-contain ml-4" src="https://www.tovaradar.ru/img/close.png">
+            </button>
+            <h5 class="text-3xl font-bold leading-normal mt-5">
+               Товар добавлен в корзину
+            </h5>
+            <div class="mt-5 md:h-40 lg:h-40 pr-card	 md:flex-nowrap	 lg:flex-nowrap	flex pr-cart ">
+                <img x-bind:src="`https://www.tovaradar.ru/img/categories/${isSelected.src}`" alt="" class="w-119 h-40 p-3 object-contain">
+                <div>
+                    <p class="mb-2" x-text="isSelected.title"></p>
+                    <p class="mb-2 font-semibold" x-text="isSelected.price"></p>
+                    <span class="site-color mr-2 ">В корзине 5 товаров</span><span>на сумму 6 971 ₽</span>
+                    <div class="flex items-baseline f-btn">
+                        <div class="custom-number-input h-10 mt-2 w-24 mr-2">
+                            <div  x-data="counter()" class="flex mt-1 rounded-lg green-border">
+                                <button x-on:click="decrement()" class="site-color text-xl px-2 cursor-pointer">
+                                    <span class="m-auto font-thin">−</span>
+                                </button>
+                                <span x-text="count" class="site-color m-auto"></span>
+                                <button  x-on:click="increment()" class="site-color text-xl px-2 cursor-pointer">
+                                    <span class="m-auto font-thin">+</span>
+                                </button>
+                            </div>
+                        </div>
+                        <button @click="modelOpen =false" class="site-green mr-4 text-white py-1 px-2 rounded-lg">
+                            Перейти в корзину
+                            </button>
+                        <button @click="modelOpen =false" class="site-color  py-1 px-2 rounded-lg">
+                            Продолжить покупки
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <button class="h-12 bg-light-gray w-full   text-center rounded-lg mb-5">Показать еще</button>
+        <div class="owl-carousel owl-carousel2  owl-theme">
+    <div class="item" >
+        <img class="lg:w-full w-4/5 m-auto  rounded-3xl h-[300px] object-cover" src="https://www.tovaradar.ru/img/carousel/23d80683a57ced681310a2f52d11a9a9.png">
+   </div>
+    <div class="item" >
+        <img class="lg:w-full w-4/5 m-auto  rounded-3xl h-[300px] object-cover" src="https://www.tovaradar.ru/img/carousel/8881244790cef758819b4239a0d3ee41.png">
+    </div>
+    <div class="item" >
+        <img class="lg:w-full w-4/5 m-auto  rounded-3xl h-[300px] object-cover" src="https://www.tovaradar.ru/img/carousel/23d80683a57ced681310a2f52d11a9a9.png">
+    </div>
+</div>
+       
+        <button class="h-12 bg-light-gray w-full   text-center rounded-10">Показать еще</button>
+        <p class="font-bold	bold-text pt-10 pb-5">На основе просморов</p>
+        <div class="grid grid-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 grid-cols-5 gap-8 flexbox-hit"  x-data="{ hits: [
+                { id: 1, src: '428a66b45480074e9e4499d9b963f368.png', new:false, price: '3000 ₽', title:'Ультрабук Huawei MateBook D 14 NbD-WDI9 Mystic Silver'},
+                { id: 2, src: 'e66a4355c7ed0a8e80528e399e7baf2c.png', new:true, price: '3000 ₽', title:'Ультрабук Huawei MateBook D 14 NbD-WDI9 Mystic Silver (53013ERK)' },
+                { id: 3, src: '924950eafa3c70c235a3117ef2b6b842.png', new:false, price: '3000 ₽', title:'Умная колонка Яндекс Станция Мини' },
+                { id: 4, src: '79390f3c799bd15491211fcb4773b3a1.png', new:false, price: '3000 ₽', title:'Робот-пылесос Xiaomi Mi Robot'},
+                { id: 5, src: 'b4de14290b7b47b0a27e78d203422824.png', new:false, price: '3000 ₽', title:'Зеркальный фотоаппарат Canon EOS 6D Body' },
+                { id: 6, src: '428a66b45480074e9e4499d9b963f368.png', new:false, price: '3000 ₽', title:'Ультрабук Huawei MateBook D 14 NbD-WDI9 Mystic Silver'},
+                { id: 7, src: 'e66a4355c7ed0a8e80528e399e7baf2c.png', new:true, price: '3000 ₽', title:'Ультрабук Huawei MateBook D 14 NbD-WDI9 Mystic Silver (53013ERK)' },
+                { id: 8, src: '924950eafa3c70c235a3117ef2b6b842.png', new:false, price: '3000 ₽', title:'Умная колонка Яндекс Станция Мини' },
+                { id: 9, src: '79390f3c799bd15491211fcb4773b3a1.png', new:false, price: '3000 ₽', title:'Робот-пылесос Xiaomi Mi Robot'},
+                { id: 10, src: 'b4de14290b7b47b0a27e78d203422824.png', new:false, price: '3000 ₽', title:'Зеркальный фотоаппарат Canon EOS 6D Body' },
+            ]}">
+            <template x-for="hit in hits" :key="hit.id">
+                <div class="flex flex-col p-3 h-96 rounded-lg justify-between  w-56 mb-5">
+                      <div>
+                          <div class="flex flex justify-between">
+                              <template x-if="hit.new">
+                                <span class="rounded-lg bg-orange-500 px-2 py-1 text-sm text-white">Новинка</span>
+                              </template>
+                              <span class="rounded-lg font-bold new text-white"></span>
+
+                              <div class=""  x-data="{liked:false}">
+                                  <button @click="liked =!liked"  type="button">
+                                        <img x-show="!liked" src="https://www.tovaradar.ru/img/heart.png"  class="object-contain h-5" />
+                                        <img x-show="liked" src="https://www.tovaradar.ru/img/icon like.png"  class="object-contain h-5" />
+                                  </button>
+                              </div>
+                          </div>
+                          <img class="h-40 m-auto" x-bind:src="`https://www.tovaradar.ru/img/categories/${hit.src}`" alt="">
+                          <div class="text-lg font-bold">
+                              <span>от </span><span x-text="hit.price"></span>
+                          </div>
+                          <a href="/product-card" x-text="hit.title"></a>
+                      </div>
+                      <div class="flex flex-col">
+                          <span class="text-md text-gray-400 mb-1">26 предложений</span>
+                          <button @click="modelOpen =true,isSelected = hit" class="site-green w-2/3 text-white py-2 px-4 rounded-10">
+                              Купить
+                          </button>
+                      </div>
+                </div>
+           </template>
+        </div>
+        <button class="h-12 bg-light-gray w-full   text-center rounded-10">Показать еще</button>
+
+
+        <p class="font-bold	bold-text pt-10 pb-5">Магазины</p>
+        <div class="grid grid-1  md:grid-cols-4 lg:grid-cols-6 gap-8 flexbox-hit-3" x-data="{ brends: [
+                { id: 1, src: 'b233c40f7a64980768abd83be37e61c7.png'},
+                { id: 2, src: '95dcc4642fa8a306e80051167df53e4d.png'},
+                { id: 3, src: '7c45f933a7ced98cc25dfa3480485579.png'},
+                { id: 4, src: 'abd28730d9108249fb11e3212005d87a.png'},
+                { id: 5, src: '882aab4ebe2e1f6dd39ae3191e0daaf3.png'},
+                { id: 6, src: '437954181d19d0da391ed8cba25c690a.png'},
+                { id: 7, src: '0352456670888485b4ddda3053ef0d4f.png'},
+                { id: 8, src: '65e91fdb70cd26cbd82a7b4b5273b4d1.png'},
+                { id: 9, src: '870c1c844a9733b00d0c3e3253dcab65.png'},
+                { id: 10, src: '32a83b9bfb638d7389029a8a8e7bf288.png'},
+                { id: 11, src: '768d6f6368db2585866065d15ddbbbe4.png'},
+                { id: 12, src: 'fa56e09f8c919ffd50ad681b996b86cb.png'},
+                { id: 13, src: '655f90ed608f07876c5e95536bc1521d.png'},
+                { id: 14, src: '994db2c879910d95e4213a48bbdeb347.png'},
+                { id: 15, src: '948e1160b9822f4863c61d2138ce5deb.png'},
+                { id: 16, src: '0e031b2b3b57221b7f7ff5bae4457ced.png'},
+                { id: 17, src: 'd8d2a294cc4091dd571a57f516a86baf.png'},
+            ]}">
+            <template x-for="brend in brends" :key="brend.id">
+                <a href="/seller" class="flex  rounded-lg  w-48 sm:w-40 mb-5 item">
+                   <img class="h-24" x-bind:src="`https://www.tovaradar.ru/img/shop/${brend.src}`" alt="">
+               </a>
+           </template>
+           <a href="/seller" class="flex justify-center h-24 items-center bg-gray-200 rounded-10  w-48 sm:w-40 mb-5 item">
+              <span >Все продавцы</span>
+          </a>
+        </div>
+        <div class="flex justify-between items-baseline">
+            <p class="font-bold	bold-text pt-10 pb-5">Вы просматривали</p>
+            <div class="flex">
+                <a class="text-gray-300 mr-2 flex shadow-item items-center justify-center  w-10 h-10 bg-white-gray hover:bg-white/50 rounded-full cursor-pointer"
+                    onclick="moveSlide3(-1)"><img class="h-2.5" x-bind:src="`https://www.tovaradar.ru/img/left.png`" alt=""></a>
+                <a class="text-gray-300 shadow-item flex items-center justify-center  w-10 h-10 bg-white-gray hover:bg-white/50 rounded-full cursor-pointer"
+                    onclick="moveSlide3(1)"><img class="h-2.5" x-bind:src="`https://www.tovaradar.ru/img/right.png`" alt=""></a>
+            </div>
+        </div>
+        <div class="seen grid grid-1 mb-10 md:grid-cols-3 lg:grid-cols-5 grid-cols-3 flexbox-hit-3 sm:h-40 sm:overflow-hidden"  x-data="{ brends: [
+                { id: 1, src: '428a66b45480074e9e4499d9b963f368.png'},
+                { id: 2, src: 'b4de14290b7b47b0a27e78d203422824.png'},
+                { id: 3, src: '79390f3c799bd15491211fcb4773b3a1.png'},
+                { id: 4, src: '924950eafa3c70c235a3117ef2b6b842.png'},
+                { id: 5, src: 'e66a4355c7ed0a8e80528e399e7baf2c.png'},
+            ]}">
+            <template x-for="brend in brends" :key="brend.id">
+                <div class="flex  rounded-lg  w-56 mb-5 item">
+                   <img class="h-40" x-bind:src="`https://www.tovaradar.ru/img/categories/${brend.src}`" alt="">
+                </div>
+           </template>
+        </div>
+        <p> 
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quidem soluta unde, corrupti temporibus odit, asperiores quibusdam labore tenetur repudiandae ducimus officia nulla adipisci impedit dolore, sit placeat id! Cumque dolor deserunt distinctio doloremque eum dolores iusto nulla at ad! Corrupti qui ipsum eligendi cupiditate voluptatum provident necessitatibus repellat, atque tenetur facere sit mollitia. Error laboriosam velit iste sunt quod officia minus! Dignissimos quasi pariatur culpa aspernatur nobis inventore quidem numquam eaque, odit tempora expedita libero explicabo, a aliquam nihil corporis fugiat quam id beatae. Odio labore vel eaque! Repellendus exercitationem nostrum nihil inventore facilis obcaecati fugit saepe, pariatur dicta consequatur, aliquam placeat quidem illum sunt eos beatae. Earum deserunt odio recusandae, voluptatibus esse voluptatum eius quasi! Distinctio doloribus sint alias itaque quisquam recusandae rem porro voluptates tempore saepe fugiat, omnis maxime incidunt exercitationem nam blanditiis velit vel nisi, nobis dolorum sapiente debitis. Recusandae fugiat aut est debitis id quia?
+        </p>
+    </div>
+            </main>
+            <footer class="text-center lg:text-left " style="background:#EEF1F2">       
+  <div class="py-10 text-center md:text-left main max-w-7xl mx-auto px-4 sm:px-12 lg:px-8 md:px-16">
+    <div class="grid grid-1 lg:grid-cols-5 md:grid-cols-3 grid-cols-2">
+        <div class="">
+          <h6 class="font-bold mb-4 flex justify-center md:justify-start">
+              О компании
+          </h6>
+          <p class="mb-4">
+            <a href="#!" class="text-gray-600">Контакты</a>
+          </p>
+          <p class="mb-4">
+            <a href="#!" class="text-gray-600">Вакансии</a>
+          </p>
+          <p class="mb-4">
+            <a href="#!" class="text-gray-600">Реквизиты</a>
+          </p>
+          <p>
+            <a href="#!" class="text-gray-600">Партнерская программа</a>
+          </p>
+        </div>
+      <div class="">
+        <h6 class="font-bold mb-4 flex justify-center md:justify-start">
+          Покупателю
+        </h6>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Помощь покупателю</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Доставка</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Оплата</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Возврат</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Кредит</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Акции</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Промокоды</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">СберСпасибо</a>
+        </p>
+      </div>
+      <div class="">
+        <h6 class="font-bold mb-4 flex justify-center md:justify-start">
+          Магазинам
+        </h6>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Помощь магазинам</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Приглашение к сотрудничеству</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Вход в личный кабинет</a>
+        </p>
+      </div>
+      <div class="">
+        <h6 class="font-bold mb-4 flex justify-center md:justify-start">
+            Правовая информация
+        </h6>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Условия использования сайта</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Политика обработки персональных данных</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Условия заказа и доставки</a>
+        </p>
+        <p class="mb-4">
+          <a href="#!" class="text-gray-600">Правила сервиса «закажи и забери»</a>
+        </p>
+        <p class="mb-4">
+          <a href="/frames" class="text-gray-600">Frames 282 283</a>
+        </p>
+      </div>
+      <div class="flex flex-col lg:items-end items-center">
+        <p style="margin-right: -25px;">
+            <a href="/"><img class="logo lg:h-24 h-16 app-logo" src="https://www.tovaradar.ru/img/logo.png" /></a>
+        </p>
+          <p class="text-gray-400 text-center">© 2022 «Texnostore»</p>
+        <p class="mb-4">
+          <div class="flex justify-center">
+              <a href="#"><img class="h-6" src="https://www.tovaradar.ru/img/001-instagram.png" /></a>
+              <a href="#"><img class="h-6 mx-2" src="https://www.tovaradar.ru/img/002-viber.png" /></a>
+              <a href="#"><img class="h-6" src="https://www.tovaradar.ru/img/Group.png" /></a>
+          </div>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+        </div>
+        <script defer src="https://unpkg.com/alpinejs@3.2.4/dist/cdn.min.js"></script>
+        <!-- <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script> -->
+        <script src="https://www.tovaradar.ru/js/script.js"></script>
+        <!-- <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script> -->
+
+    </body>
+</html>
